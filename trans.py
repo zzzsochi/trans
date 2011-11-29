@@ -19,7 +19,7 @@ Please read the documentation for
 
 """
 
-__version__ = '1.4.1'
+__version__ = '1.4.2'
 __author__ = 'Zelenyak Aleksandr aka ZZZ <zzz.sochi@gmail.com>'
 
 latin = {

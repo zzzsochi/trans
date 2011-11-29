@@ -3,6 +3,7 @@
 *.pyo
 
 PKG-INFO
+MANIFEST
 .DS_Store
 trans.egg-info/
 dist/
