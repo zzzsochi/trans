@@ -20,7 +20,7 @@ setup(
         author = 'Zelenyak Aleksandr aka ZZZ',
         author_email = 'ZZZ.Sochi@GMail.com',
         url = 'http://www.python.org/pypi/trans/',
-        license = 'GPL',
+        license = 'BSD',
         platforms = 'any',
 
         classifiers = [
