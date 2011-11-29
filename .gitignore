@@ -1,0 +1,8 @@
+
+*.pyc
+*.pyo
+
+.DS_Store
+trans.egg-info/
+dist/
+

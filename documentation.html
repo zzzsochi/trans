@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>The trans module</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="the-trans-module">
+<h1 class="title">The <strong>trans</strong> module</h1>
+
+<p>This module translates national characters into similar sounding
+latin characters (transliteration).
+At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
+alphabets are supported (it covers 99% of needs).</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#simple-usage" id="id1">Simple usage</a><ul>
+<li><a class="reference internal" href="#it-s-very-easy-to-use" id="id2">It's very easy to use</a></li>
+<li><a class="reference internal" href="#work-only-with-unicode-strings" id="id3">Work only with unicode strings</a></li>
+<li><a class="reference internal" href="#this-is-readability" id="id4">This is readability</a></li>
+<li><a class="reference internal" href="#table-slug" id="id5">Table &quot;<strong>slug</strong>&quot;</a></li>
+<li><a class="reference internal" href="#table-id" id="id6">Table &quot;<strong>id</strong>&quot;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#define-user-tables" id="id7">Define user tables</a><ul>
+<li><a class="reference internal" href="#simple-variant" id="id8">Simple variant</a></li>
+<li><a class="reference internal" href="#a-little-harder" id="id9">A little harder</a></li>
+<li><a class="reference internal" href="#without-the-diphthongs" id="id10">Without the diphthongs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#changelog" id="id11">ChangeLog</a></li>
+<li><a class="reference internal" href="#finally" id="id12">Finally</a></li>
+</ul>
+</div>
+<div class="section" id="simple-usage">
+<h1><a class="toc-backref" href="#id1">Simple usage</a></h1>
+<div class="section" id="it-s-very-easy-to-use">
+<h2><a class="toc-backref" href="#id2">It's very easy to use</a></h2>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; # coding: utf-8
+&gt;&gt;&gt; import trans
+&gt;&gt;&gt; u'Hello World!'.encode('trans')
+u'Hello World!'
+&gt;&gt;&gt; u'Привет, Мир!'.encode('trans')
+u'Privet, Mir!'
+</pre>
+</blockquote>
+</div>
+<div class="section" id="work-only-with-unicode-strings">
+<h2><a class="toc-backref" href="#id3">Work only with unicode strings</a></h2>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; 'Hello World!'.encode('trans')
+Traceback (most recent call last):
+    ...
+TypeError: trans codec support only unicode string, &lt;type 'str'&gt; given.
+</pre>
+</blockquote>
+</div>
+<div class="section" id="this-is-readability">
+<h2><a class="toc-backref" href="#id4">This is readability</a></h2>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; s = u'''\
+...    -- Раскудрить твою через коромысло в бога душу мать
+...             триста тысяч раз едрену вошь тебе в крыло
+...             и кактус в глотку! -- взревел разъяренный Никодим.
+...    -- Аминь, -- робко добавил из склепа папа Пий.
+...                 (c) Г. Л. Олди, &quot;Сказки дедушки вампира&quot;.'''
+&gt;&gt;&gt;
+&gt;&gt;&gt; print s.encode('trans')
+   -- Raskudrit tvoyu cherez koromyslo v boga dushu mat
+            trista tysyach raz edrenu vosh tebe v krylo
+            i kaktus v glotku! -- vzrevel razyarennyy Nikodim.
+   -- Amin, -- robko dobavil iz sklepa papa Piy.
+                (c) G. L. Oldi, &quot;Skazki dedushki vampira&quot;.
+</pre>
+</blockquote>
+</div>
+<div class="section" id="table-slug">
+<h2><a class="toc-backref" href="#id5">Table &quot;<strong>slug</strong>&quot;</a></h2>
+<p>Use the table &quot;slug&quot;, leaving only the Latin characters, digits and underscores:</p>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; print u'1 2 3 4 5 \n6 7 8 9 0'.encode('trans')
+1 2 3 4 5
+6 7 8 9 0
+&gt;&gt;&gt; print u'1 2 3 4 5 \n6 7 8 9 0'.encode('trans/slug')
+1_2_3_4_5__6_7_8_9_0
+&gt;&gt;&gt; s.encode('trans/slug')[-42:-1]
+u'_c__G__L__Oldi___Skazki_dedushki_vampira_'
+</pre>
+</blockquote>
+</div>
+<div class="section" id="table-id">
+<h2><a class="toc-backref" href="#id6">Table &quot;<strong>id</strong>&quot;</a></h2>
+<p>Table <strong>id</strong> is deprecated and renamed to <strong>slug</strong>.
+Old name also available, but not recommended.</p>
+</div>
+</div>
+<div class="section" id="define-user-tables">
+<h1><a class="toc-backref" href="#id7">Define user tables</a></h1>
+<div class="section" id="simple-variant">
+<h2><a class="toc-backref" href="#id8">Simple variant</a></h2>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; u'1 2 3 4 5 6 7 8 9 0'.encode('trans/my')
+Traceback (most recent call last):
+    ...
+ValueError: Table &quot;my&quot; not found in tables!
+&gt;&gt;&gt; trans.tables['my'] = {u'1': u'A', u'2': u'B'};
+&gt;&gt;&gt; u'1 2 3 4 5 6 7 8 9 0'.encode('trans/my')
+u'A_B________________'
+&gt;&gt;&gt;
+</pre>
+</blockquote>
+</div>
+<div class="section" id="a-little-harder">
+<h2><a class="toc-backref" href="#id9">A little harder</a></h2>
+<p>Table can consist of two parts - the map of diphthongs and the map of characters.
+Diphthongs are processed first by simple replacement in the substring.
+Then each character of the received string is replaced according to the map of
+characters. If character is absent in the map of characters, key <strong>None</strong> are checked.
+If key <strong>None</strong> is not present, the default character <strong>u'_'</strong> is used.</p>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; diphthongs = {u'11': u'AA', u'22': u'BB'}
+&gt;&gt;&gt; characters = {u'a': u'z', u'b': u'y', u'c': u'x', None: u'-',
+...               u'A': u'A', u'B': u'B'}  # See below...
+&gt;&gt;&gt; trans.tables['test'] = (diphthongs, characters)
+&gt;&gt;&gt; u'11abc22cbaCC'.encode('trans/test')
+u'AAzyxBBxyz--'
+</pre>
+</blockquote>
+<p><strong>The characters are created by processing of diphthongs also processed
+by the map of the symbols:</strong></p>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; diphthongs = {u'11': u'AA', u'22': u'BB'}
+&gt;&gt;&gt; characters = {u'a': u'z', u'b': u'y', u'c': u'x', None: u'-'}
+&gt;&gt;&gt; trans.tables['test'] = (diphthongs, characters)
+&gt;&gt;&gt; u'11abc22cbaCC'.encode('trans/test')
+u'--zyx--xyz--'
+</pre>
+</blockquote>
+</div>
+<div class="section" id="without-the-diphthongs">
+<h2><a class="toc-backref" href="#id10">Without the diphthongs</a></h2>
+<p>These two tables are equivalent:</p>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; characters = {u'a': u'z', u'b': u'y', u'c': u'x', None: u'-'}
+&gt;&gt;&gt; trans.tables['t1'] = characters
+&gt;&gt;&gt; trans.tables['t2'] = ({}, characters)
+&gt;&gt;&gt; u'11abc22cbaCC'.encode('trans/t1') == u'11abc22cbaCC'.encode('trans/t2')
+True
+</pre>
+</blockquote>
+</div>
+</div>
+<div class="section" id="changelog">
+<h1><a class="toc-backref" href="#id11">ChangeLog</a></h1>
+<p>1.3 - 2010-05-18</p>
+<blockquote>
+<ul class="simple">
+<li>Table &quot;id&quot; renamed to &quot;slug&quot;. Old name also available.</li>
+<li>Some speed optimizations (thx to AndyLegkiy &lt;andy.legkiy at gmail.com&gt;).</li>
+</ul>
+</blockquote>
+<p>1.2 - 2010-01-10</p>
+<blockquote>
+<ul class="simple">
+<li>First public release.</li>
+<li>Translate documentation to English.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="finally">
+<h1><a class="toc-backref" href="#id12">Finally</a></h1>
+<ul>
+<li><dl class="first docutils">
+<dt><em>Special thanks to Yuri Yurevich aka j2a for the kick in the right direction.</em></dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://www.python.su/forum/viewtopic.php?pid=28965">http://www.python.su/forum/viewtopic.php?pid=28965</a></li>
+<li><a class="reference external" href="http://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js">http://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><em>I ask forgiveness for my bad English. I promise to be corrected.</em></p>
+</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
