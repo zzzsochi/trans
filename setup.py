@@ -8,7 +8,7 @@ from distutils.core import setup
 description = 'National characters transcription module.'
 
 import trans
-long_description = open('documentation.rst', 'rb').read()
+long_description = open('README.rst', 'rb').read()
 version = trans.__version__
 
 
@@ -19,7 +19,7 @@ setup(
         long_description = long_description,
         author = 'Zelenyak Aleksandr aka ZZZ',
         author_email = 'ZZZ.Sochi@GMail.com',
-        url = 'http://www.python.org/pypi/trans/',
+        url = 'https://github.com/zzzsochi/trans',
         license = 'BSD',
         platforms = 'any',
 
