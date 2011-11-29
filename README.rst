@@ -113,6 +113,10 @@ These two tables are equivalent:
 ChangeLog
 ---------
 
+1.4 - 2011-11-29
+
+    * Change license to BSD.
+
 1.3 - 2010-05-18
 
     * Table "id" renamed to "slug". Old name also available.
