@@ -2,6 +2,7 @@
 *.pyc
 *.pyo
 
+PKG-INFO
 .DS_Store
 trans.egg-info/
 dist/
