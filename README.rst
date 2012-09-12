@@ -6,7 +6,7 @@ The **trans** module
 This module translates national characters into similar sounding
 latin characters (transliteration).
 At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
-alphabets are supported (it covers 99% of needs).
+and Kazakh alphabets are supported (it covers 99% of needs).
 
 .. contents::
 

@@ -1,7 +1,6 @@
 # coding: utf-8
 
 ur"""
-
 This module translates national characters into similar sounding
 latin characters (transliteration).
 At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
@@ -14,12 +13,10 @@ and Kazakh alphabets are supported (it covers 99% of needs).
   >>> u'Привет, Мир!'.encode('trans')
   u'Privet, Mir!'
 
-Читайте документацию для того, чтобы узнать больше.
-Please read the documentation for 
-
+Please read the README.rst to learn more.
 """
 
-__version__ = '1.4.2'
+__version__ = '1.5'
 __author__ = 'Zelenyak Aleksandr aka ZZZ <zzz.sochi@gmail.com>'
 
 latin = {
@@ -106,8 +103,10 @@ latvian = {
 }
 
 kazakh = (russian[0].copy(), {
-    u'ә': u'a', u'ғ': u'g', u'қ': u'k', u'ң': 'n', u'ө': u'o', u'ұ': u'u', u'ү': u'u', u'һ': u'h', u'і': u'i',
-    u'Ә': u'A', u'Ғ': u'G', u'Қ': u'K', u'Ң': 'N', u'Ө': u'O', u'Ұ': u'U', u'Ү': u'U', u'Һ': u'H', u'І': u'I',
+    u'ә': u'a', u'ғ': u'g', u'қ': u'k', u'ң': 'n', u'ө': u'o', u'ұ': u'u',
+    u'ү': u'u', u'һ': u'h', u'і': u'i',
+    u'Ә': u'A', u'Ғ': u'G', u'Қ': u'K', u'Ң': 'N', u'Ө': u'O', u'Ұ': u'U',
+    u'Ү': u'U', u'Һ': u'H', u'І': u'I',
 })
 kazakh[1].update(russian[1])
 
@@ -135,8 +134,7 @@ def trans(input, table=ascii):
     '''Translate unicode string, using 'table'.
        Table may be tuple (diphthongs, other) or dict (other).'''
     if not isinstance(input, unicode):
-        raise TypeError, 'trans codec support only unicode string, %r given.' \
-                                                        % type(input)
+        raise TypeError('trans codec support only unicode string, %r given.' % type(input))
     if isinstance(table, dict):
         table = ({}, table)
 
@@ -145,7 +143,7 @@ def trans(input, table=ascii):
         first = first.replace(diphthong, value)
 
     default = table[1].get(None, u'_')
-    
+
     second = u''
     for char in first:
         second += table[1].get(char, default)
@@ -154,18 +152,22 @@ def trans(input, table=ascii):
 
 tables = {'ascii': ascii, 'text': ascii, 'slug': slug, 'id': slug}
 
+
 import codecs
+
 
 def encode(input, errors='strict', table_name='ascii'):
     try:
         table = tables[table_name]
     except KeyError:
-        raise ValueError, 'Table "%s" not found in tables!' % table_name
+        raise ValueError('Table "%s" not found in tables!' % table_name)
     else:
         return trans(input, table)
 
+
 def no_decode(input, errors='strict'):
     raise TypeError("trans codec does not support decode.")
+
 
 def trans_codec(enc):
     if enc == 'trans':
@@ -178,10 +180,8 @@ def trans_codec(enc):
     if enc_name != 'trans':
         return None
     if table_name not in tables:
-        raise ValueError, 'Table "%s" not found in tables!' % table_name
+        raise ValueError('Table "%s" not found in tables!' % table_name)
 
-    return codecs.CodecInfo(lambda i, e='strict': encode(i, e, table_name),
-                            no_decode)
+    return codecs.CodecInfo(lambda i, e='strict': encode(i, e, table_name), no_decode)
 
 codecs.register(trans_codec)
-
