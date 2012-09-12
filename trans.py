@@ -5,7 +5,7 @@ ur"""
 This module translates national characters into similar sounding
 latin characters (transliteration).
 At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
-alphabets are supported (it covers 99% of needs).
+and Kazakh alphabets are supported (it covers 99% of needs).
 
   >>> # coding: utf-8
   >>> import trans
@@ -105,7 +105,11 @@ latvian = {
     u'Ļ': u'L', u'Ņ': u'N', u'Š': u'S', u'Ū': u'u', u'Ž': u'Z'
 }
 
-
+kazakh = (russian[0].copy(), {
+    u'ә': u'a', u'ғ': u'g', u'қ': u'k', u'ң': 'n', u'ө': u'o', u'ұ': u'u', u'ү': u'u', u'һ': u'h', u'і': u'i',
+    u'Ә': u'A', u'Ғ': u'G', u'Қ': u'K', u'Ң': 'N', u'Ө': u'O', u'Ұ': u'U', u'Ү': u'U', u'Һ': u'H', u'І': u'I',
+})
+kazakh[1].update(russian[1])
 
 ascii_str = u'''_0123456789
 abcdefghijklmnopqrstuvwxyz
@@ -113,7 +117,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
 !"#$%&'()*+,_-./:;<=>?@[\\]^`{|}~ \t\n\r\x0b\x0c'''
 
 ascii = ({}, dict(zip(ascii_str, ascii_str)))
-for t in [latin, greek, turkish, russian, ukrainian, czech, polish, latvian]:
+for t in [latin, greek, turkish, russian, ukrainian, czech, polish, latvian, kazakh]:
     if isinstance(t, dict):
         t = ({}, t)
     ascii[0].update(t[0])
