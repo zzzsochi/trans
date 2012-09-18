@@ -1,4 +1,4 @@
-# coding: utf-8
+# coding: utf8
 
 ur"""
 This module translates national characters into similar sounding
@@ -16,7 +16,7 @@ and Kazakh alphabets are supported (it covers 99% of needs).
 Please read the README.rst to learn more.
 """
 
-__version__ = '1.5'
+__version__ = '1.5.1'
 __author__ = 'Zelenyak Aleksandr aka ZZZ <zzz.sochi@gmail.com>'
 
 latin = {

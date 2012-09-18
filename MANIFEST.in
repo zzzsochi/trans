@@ -1,0 +1,4 @@
+include setup.cfg
+include test.py
+include README.rst
+include CHANGELOG

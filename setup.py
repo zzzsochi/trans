@@ -1,15 +1,15 @@
-# coding: utf-8
+# coding: utf8
 
 from distutils.core import setup
+
+import trans
 
 # python setup.py sdist --formats=bztar
 # python setup.py sdist --formats=bztar upload
 
-description = 'National characters transcription module.'
-
-import trans
-long_description = open('README.rst', 'rb').read()
 version = trans.__version__
+long_description = open('README.rst', 'rb').read()
+description = 'National characters transcription module.'
 
 
 setup(
