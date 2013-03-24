@@ -14,13 +14,20 @@ Simple usage
 ------------
 It's very easy to use
 ~~~~~~~~~~~~~~~~~~~~~
+
+for python 2.x:
+
   >>> # coding: utf-8
   >>> import trans
   >>> u'Hello World!'.encode('trans')
   u'Hello World!'
   >>> u'Привет, Мир!'.encode('trans')
   u'Privet, Mir!'
-
+  
+for python 3.x:
+    
+  >>> from trans import trans
+  >>> trans('Привет, Мир!')[0]
 
 Work only with unicode strings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

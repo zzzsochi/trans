@@ -1,10 +1,12 @@
-# coding: utf8
-
-ur"""
+# -*- coding: utf-8 -*-
+import sys
+u"""
 This module translates national characters into similar sounding
 latin characters (transliteration).
 At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
 and Kazakh alphabets are supported (it covers 99% of needs).
+
+for python 2.x:
 
   >>> # coding: utf-8
   >>> import trans
@@ -12,6 +14,11 @@ and Kazakh alphabets are supported (it covers 99% of needs).
   u'Hello World!'
   >>> u'Привет, Мир!'.encode('trans')
   u'Privet, Mir!'
+  
+for python 3.x:
+    
+  >>> from trans import trans
+  >>> trans('Привет, Мир!')[0]
 
 Please read the README.rst to learn more.
 """
@@ -133,10 +140,16 @@ for c in '''!"#$%&'()*+,_-./:;<=>?@[\\]^`{|}~ \t\n\r\x0b\x0c''':
 def trans(input, table=ascii):
     '''Translate unicode string, using 'table'.
        Table may be tuple (diphthongs, other) or dict (other).'''
-    if not isinstance(input, unicode):
-        raise TypeError('trans codec support only unicode string, %r given.' % type(input))
-    if isinstance(table, dict):
-        table = ({}, table)
+    if sys.version[0]=='3':
+        if not isinstance(input, str):
+            raise TypeError('trans codec support only unicode string, %r given.' % type(input))
+        if isinstance(table, dict):
+            table = ({}, table)
+    else: 
+        if not isinstance(input, unicode):
+            raise TypeError('trans codec support only unicode string, %r given.' % type(input))
+        if isinstance(table, dict):
+            table = ({}, table)
 
     first = input
     for diphthong, value in table[0].items():
@@ -162,8 +175,16 @@ def encode(input, errors='strict', table_name='ascii'):
     except KeyError:
         raise ValueError('Table "%s" not found in tables!' % table_name)
     else:
-        return trans(input, table)
-
+        if sys.version[0] == '2':
+            return trans(input, table)
+        else:
+            print('\n ----------Warning!----------')
+            print(' You are using 3th version of Python, wich have some specific in work\n\
+    with encode. So, for using "trans"-module you should follow this way:\n\
+    >>>from trans import trans\n\
+    >>>trans("Привет, Мир!")[0]')
+            print('\n----------------------------')
+            raise ValueError('Troubles with python3. Look at readme.')
 
 def no_decode(input, errors='strict'):
     raise TypeError("trans codec does not support decode.")
