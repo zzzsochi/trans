@@ -7,7 +7,7 @@ from nose.plugins.skip import SkipTest
 
 from trans import trans
 
-PY2 = sys.version_info.major == 2
+PY2 = sys.version_info[0] == 2
 
 
 def py2(func):

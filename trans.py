@@ -29,7 +29,7 @@ import codecs
 __version__ = '2.0'
 __author__ = 'Zelenyak Aleksandr aka ZZZ <zzz.sochi@gmail.com>'
 
-PY2 = sys.version_info.major == 2
+PY2 = sys.version_info[0] == 2
 
 
 class Trans(object):
