@@ -1,4 +1,3 @@
-
 ====================
 The **trans** module
 ====================
@@ -15,19 +14,18 @@ Simple usage
 It's very easy to use
 ~~~~~~~~~~~~~~~~~~~~~
 
-for python 2.x:
+Python 3:
 
-  >>> # coding: utf-8
+  >>> from trans import trans
+  >>> trans('Привет, Мир!')
+
+Python 2:
+
   >>> import trans
-  >>> u'Hello World!'.encode('trans')
-  u'Hello World!'
   >>> u'Привет, Мир!'.encode('trans')
   u'Privet, Mir!'
-  
-for python 3.x:
-    
-  >>> from trans import trans
-  >>> trans('Привет, Мир!')[0]
+  >>> trans.trans(u'Привет, Мир!')
+  u'Privet, Mir!'
 
 Work only with unicode strings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -120,16 +118,25 @@ These two tables are equivalent:
 ChangeLog
 ---------
 
-1.4 - 2011-11-29
+2.0 2013-04-01
+
+    * Python 3 support
+    * class Trans for create different tables spaces
+
+1.5 2012-09-12
+
+    * Add support of kazakh alphabet.
+
+1.4 2011-11-29
 
     * Change license to BSD.
 
-1.3 - 2010-05-18
+1.3 2010-05-18
 
     * Table "id" renamed to "slug". Old name also available.
     * Some speed optimizations (thx to AndyLegkiy <andy.legkiy at gmail.com>).
 
-1.2 - 2010-01-10
+1.2 2010-01-10
 
     * First public release.
     * Translate documentation to English.
@@ -139,6 +146,6 @@ ChangeLog
 Finally
 -------
 + *Special thanks to Yuri Yurevich aka j2a for the kick in the right direction.*
-    - http://www.python.su/forum/viewtopic.php?pid=28965
+    - http://python.su/forum/viewtopic.php?pid=28965
     - http://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js
 + *I ask forgiveness for my bad English. I promise to be corrected.*

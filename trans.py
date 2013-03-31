@@ -1,30 +1,79 @@
-# -*- coding: utf-8 -*-
-import sys
+# coding: utf8
+
 u"""
 This module translates national characters into similar sounding
 latin characters (transliteration).
 At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
 and Kazakh alphabets are supported (it covers 99% of needs).
 
-for python 2.x:
+Python 3:
 
-  >>> # coding: utf-8
+  >>> from trans import trans
+  >>> trans('Привет, Мир!')
+
+Python 2:
+
   >>> import trans
-  >>> u'Hello World!'.encode('trans')
-  u'Hello World!'
   >>> u'Привет, Мир!'.encode('trans')
   u'Privet, Mir!'
-  
-for python 3.x:
-    
-  >>> from trans import trans
-  >>> trans('Привет, Мир!')[0]
+  >>> trans.trans(u'Привет, Мир!')
+  u'Privet, Mir!'
 
-Please read the README.rst to learn more.
+Source and full documentations can be found here:
+https://github.com/zzzsochi/trans
 """
 
-__version__ = '1.5.1'
+import sys
+import codecs
+
+__version__ = '2.0'
 __author__ = 'Zelenyak Aleksandr aka ZZZ <zzz.sochi@gmail.com>'
+
+PY2 = sys.version_info.major == 2
+
+
+class Trans(object):
+    '''Main class for transliteration with tables.'''
+    def __init__(self, tables=None, default_table=None):
+        self.tables = tables or {}
+        self.default_table = default_table
+
+    def __call__(self, input, table=None):
+        '''Translate unicode string, using 'table'.
+           Table may be tuple (diphthongs, other), dict (other) or string name of table.'''
+
+        if table is None:
+            if self.default_table is not None:
+                table = self.default_table
+            else:
+                raise ValueError('Table not set.')
+
+        if not isinstance(input, unicode if PY2 else str):
+            raise TypeError(
+                'trans codec support only unicode string, {0!r} given.'.format(type(input))
+            )
+
+        if isinstance(table, basestring if PY2 else str):
+            try:
+                table = self.tables[table]
+            except KeyError:
+                raise ValueError(u'Table "{0}" not found in tables!'.format(table))
+
+        if isinstance(table, dict):
+            table = ({}, table)
+
+        first = input
+        for diphthong, value in table[0].items():
+            first = first.replace(diphthong, value)
+
+        default = table[1].get(None, u'_')
+
+        second = u''
+        for char in first:
+            second += table[1].get(char, default)
+
+        return second
+
 
 latin = {
     u'à': u'a',  u'á': u'a',  u'â': u'a', u'ã': u'a', u'ä': u'a', u'å': u'a',
@@ -64,8 +113,10 @@ turkish = {
 }
 
 russian = (
-    {u'юй': u'yuy', u'ей': u'yay',
-     u'Юй': u'Yuy', u'Ей': u'Yay'},
+    {
+        u'юй': u'yuy', u'ей': u'yay',
+        u'Юй': u'Yuy', u'Ей': u'Yay'
+    },
     {
     u'а': u'a',  u'б': u'b',  u'в': u'v',  u'г': u'g', u'д': u'd', u'е': u'e',
     u'ё': u'yo', u'ж': u'zh', u'з': u'z',  u'и': u'i', u'й': u'y', u'к': u'k',
@@ -113,7 +164,7 @@ kazakh = (russian[0].copy(), {
     u'ә': u'a', u'ғ': u'g', u'қ': u'k', u'ң': 'n', u'ө': u'o', u'ұ': u'u',
     u'ү': u'u', u'һ': u'h', u'і': u'i',
     u'Ә': u'A', u'Ғ': u'G', u'Қ': u'K', u'Ң': 'N', u'Ө': u'O', u'Ұ': u'U',
-    u'Ү': u'U', u'Һ': u'H', u'І': u'I',
+    u'Ү': u'U', u'Һ': u'H', u'І': u'I'
 })
 kazakh[1].update(russian[1])
 
@@ -126,83 +177,54 @@ ascii = ({}, dict(zip(ascii_str, ascii_str)))
 for t in [latin, greek, turkish, russian, ukrainian, czech, polish, latvian, kazakh]:
     if isinstance(t, dict):
         t = ({}, t)
+
     ascii[0].update(t[0])
     ascii[1].update(t[1])
-ascii[1][None] = u'_'
+
 del t
+ascii[1][None] = u'_'
 
 
 slug = (ascii[0].copy(), ascii[1].copy())
-for c in '''!"#$%&'()*+,_-./:;<=>?@[\\]^`{|}~ \t\n\r\x0b\x0c''':
+for c in u'''!"#$%&'()*+,_-./:;<=>?@[\\]^`{|}~ \t\n\r\x0b\x0c''':
     del slug[1][c]
 
+tables = {u'ascii': ascii, u'text': ascii, u'slug': slug, u'id': slug}
 
-def trans(input, table=ascii):
-    '''Translate unicode string, using 'table'.
-       Table may be tuple (diphthongs, other) or dict (other).'''
-    if sys.version[0]=='3':
-        if not isinstance(input, str):
-            raise TypeError('trans codec support only unicode string, %r given.' % type(input))
-        if isinstance(table, dict):
-            table = ({}, table)
-    else: 
-        if not isinstance(input, unicode):
-            raise TypeError('trans codec support only unicode string, %r given.' % type(input))
-        if isinstance(table, dict):
-            table = ({}, table)
-
-    first = input
-    for diphthong, value in table[0].items():
-        first = first.replace(diphthong, value)
-
-    default = table[1].get(None, u'_')
-
-    second = u''
-    for char in first:
-        second += table[1].get(char, default)
-
-    return second, len(second)
-
-tables = {'ascii': ascii, 'text': ascii, 'slug': slug, 'id': slug}
+# Main Trans with default tales
+# It uses for str.encode('trans')
+trans = Trans(tables=tables, default_table='ascii')
 
 
-import codecs
-
-
-def encode(input, errors='strict', table_name='ascii'):
-    try:
-        table = tables[table_name]
-    except KeyError:
-        raise ValueError('Table "%s" not found in tables!' % table_name)
-    else:
-        if sys.version[0] == '2':
-            return trans(input, table)
+# trans codec work only with python 2
+if PY2:
+    def encode(input, errors='strict', table_name='ascii'):
+        try:
+            table = trans.tables[table_name]
+        except KeyError:
+            raise ValueError('Table "{0}" not found in tables!'.format(table_name))
         else:
-            print('\n ----------Warning!----------')
-            print(' You are using 3th version of Python, wich have some specific in work\n\
-    with encode. So, for using "trans"-module you should follow this way:\n\
-    >>>from trans import trans\n\
-    >>>trans("Привет, Мир!")[0]')
-            print('\n----------------------------')
-            raise ValueError('Troubles with python3. Look at readme.')
+            data = trans(input, table)
+            return data, len(data)
 
-def no_decode(input, errors='strict'):
-    raise TypeError("trans codec does not support decode.")
+    def no_decode(input, errors='strict'):
+        raise TypeError('trans codec does not support decode.')
 
+    def trans_codec(enc):
+        if enc == 'trans':
+            return codecs.CodecInfo(encode, no_decode)
 
-def trans_codec(enc):
-    if enc == 'trans':
-        return codecs.CodecInfo(encode, no_decode)
-#    else:
-    try:
-        enc_name, table_name = enc.split('/', 1)
-    except ValueError:
-        return None
-    if enc_name != 'trans':
-        return None
-    if table_name not in tables:
-        raise ValueError('Table "%s" not found in tables!' % table_name)
+        try:
+            enc_name, table_name = enc.split(u'/', 1)
+        except ValueError:
+            return None
 
-    return codecs.CodecInfo(lambda i, e='strict': encode(i, e, table_name), no_decode)
+        if enc_name != 'trans':
+            return None
 
-codecs.register(trans_codec)
+        if table_name not in trans.tables:
+            raise ValueError(u'Table "{0}" not found in tables!').format(table_name)
+
+        return codecs.CodecInfo(lambda i, e='strict': encode(i, e, table_name), no_decode)
+
+    codecs.register(trans_codec)
