@@ -45,16 +45,16 @@ class TransTests(unittest.TestCase):
 
     def test_ansii(self):
         self.assertEquals(trans(u'qwerty'), u'qwerty')
-        self.assertIsInstance(trans(u'qwerty'), unicode if PY2 else str)
+        self.assertTrue(isinstance(trans(u'qwerty'), unicode if PY2 else str))
 
     def test_ansii_slug(self):
         self.assertEquals(trans(u'1 2 3 4 5 \n6 7 8 9', 'slug'), u'1_2_3_4_5__6_7_8_9')
-        self.assertIsInstance(trans(u'qwerty', 'slug'), unicode if PY2 else str)
+        self.assertTrue(isinstance(trans(u'qwerty', 'slug'), unicode if PY2 else str))
 
     def test_russian(self):
         self.assertEquals(trans(u'йцукен'), u'ycuken')
         self.assertEquals(trans(self.s), self.s_encoded)
-        self.assertIsInstance(trans(self.s), unicode if PY2 else str)
+        self.assertTrue(isinstance(trans(self.s), unicode if PY2 else str))
 
     def test_russian_slug(self):
         self.assertEquals(trans(self.s, 'slug')[-42:-1],
@@ -116,18 +116,18 @@ class CodecTests(unittest.TestCase):
     def test_ansii(self):
         self.assertEquals(u'qwerty'.encode('trans'), u'qwerty')
         self.assertEquals(u'1 2 3 4 5 \n6 7 8 9'.encode('trans'), u'1 2 3 4 5 \n6 7 8 9')
-        self.assertIsInstance(u'qwerty'.encode('trans'), unicode)
+        self.assertTrue(isinstance(u'qwerty'.encode('trans'), unicode))
 
     @py2
     def test_ansii_slug(self):
         self.assertEquals(u'1 2 3 4 5 \n6 7 8 9'.encode('trans/slug'), u'1_2_3_4_5__6_7_8_9')
-        self.assertIsInstance(u'qwerty'.encode('trans/slug'), unicode)
+        self.assertTrue(isinstance(u'qwerty'.encode('trans/slug'), unicode))
 
     @py2
     def test_russian(self):
         self.assertEquals(u'йцукен'.encode('trans'), u'ycuken')
         self.assertEquals(self.s.encode('trans'), self.s_encoded)
-        self.assertIsInstance(self.s.encode('trans'), unicode)
+        self.assertTrue(isinstance(self.s.encode('trans'), unicode))
 
     @py2
     def test_russian_slug(self):
