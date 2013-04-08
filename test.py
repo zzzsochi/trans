@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # coding: utf8
 
 import sys
@@ -8,6 +9,7 @@ from nose.plugins.skip import SkipTest
 from trans import trans
 
 PY2 = sys.version_info[0] == 2
+SET_DEFAULT_UTF8 = False
 
 
 def py2(func):
@@ -154,3 +156,31 @@ class CodecTests(unittest.TestCase):
     @py2
     def test_encode_str_exc(self):
         self.assertRaises(TypeError, 'qwerty'.encode, 'trans')
+
+    @py2
+    def test_my_table_uname(self):
+        u'''Unicode table name not allowed because of
+        http://docs.python.org/2/howto/unicode.html#the-unicode-type
+
+            The unicode() constructor has the signature unicode(string[, encoding, errors]).
+            All of its arguments should be 8-bit strings.
+
+        u''.encode(u'trans/имятаблицы') will raise UnicodeEncodeError.
+
+        But if do sys.setdefaultencoding("UTF-8"), it will work!
+        See bottom of this file.
+        '''
+        if not SET_DEFAULT_UTF8:
+            raise SkipTest('Not set SET_DEFAULT_UTF8. Execute "python ./tests.py".')
+
+        trans.tables[u'имя_таблицы'] = {u'1': u'2', u'2': u'3'}
+        self.assertEquals(u'1 2'.encode(u'trans/имя_таблицы'), u'2_3')
+
+
+if __name__ == '__main__':
+    if PY2:
+        reload(sys)
+        sys.setdefaultencoding("UTF-8")
+        SET_DEFAULT_UTF8 = True
+
+    unittest.main()
