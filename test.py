@@ -16,7 +16,7 @@ def py2(func):
     '''Mark test as work only with python 2'''
     def wrapper(self):
         if not PY2:
-            raise SkipTest
+            raise SkipTest('This test only for python 2')
         else:
             return func(self)
 
@@ -46,46 +46,46 @@ class TransTests(unittest.TestCase):
                 del trans.tables[table]
 
     def test_ansii(self):
-        self.assertEquals(trans(u'qwerty'), u'qwerty')
+        self.assertEqual(trans(u'qwerty'), u'qwerty')
         self.assertTrue(isinstance(trans(u'qwerty'), unicode if PY2 else str))
 
     def test_ansii_slug(self):
-        self.assertEquals(trans(u'1 2 3 4 5 \n6 7 8 9', 'slug'), u'1_2_3_4_5__6_7_8_9')
+        self.assertEqual(trans(u'1 2 3 4 5 \n6 7 8 9', 'slug'), u'1_2_3_4_5__6_7_8_9')
         self.assertTrue(isinstance(trans(u'qwerty', 'slug'), unicode if PY2 else str))
 
     def test_russian(self):
-        self.assertEquals(trans(u'йцукен'), u'ycuken')
-        self.assertEquals(trans(self.s), self.s_encoded)
+        self.assertEqual(trans(u'йцукен'), u'ycuken')
+        self.assertEqual(trans(self.s), self.s_encoded)
         self.assertTrue(isinstance(trans(self.s), unicode if PY2 else str))
 
     def test_russian_slug(self):
-        self.assertEquals(trans(self.s, 'slug')[-42:-1],
+        self.assertEqual(trans(self.s, 'slug')[-42:-1],
                 u'_c__G__L__Oldi___Skazki_dedushki_vampira_')
 
     def test_russian_diphthongs(self):
-        self.assertEquals(trans(u'Юй Икари...'), u'Yuy Ikari...')
+        self.assertEqual(trans(u'Юй Икари...'), u'Yuy Ikari...')
 
     def test_my_table_simple(self):
         my_simple = {u'1': u'2', u'2': u'3'}
-        self.assertEquals(trans(u'1 2', my_simple), u'2_3')
+        self.assertEqual(trans(u'1 2', my_simple), u'2_3')
 
     def test_my_table_complex(self):
         my_complex = ({u'4 5': u'45'}, {u'1': u'11', u'2': u'22',
                                      u'4': u'4', u'5': u'5',
                                      None: u'-'})
 
-        self.assertEquals(trans(u'1 2 3 4 5 6 7 8 9', my_complex), u'11-22---45--------')
+        self.assertEqual(trans(u'1 2 3 4 5 6 7 8 9', my_complex), u'11-22---45--------')
 
     def test_my_table_simple_register(self):
         trans.tables['my_simple'] = {u'1': u'2', u'2': u'3'}
-        self.assertEquals(trans(u'1 2', 'my_simple'), u'2_3')
+        self.assertEqual(trans(u'1 2', 'my_simple'), u'2_3')
 
     def test_my_table_complex_register(self):
         trans.tables['my_complex'] = ({u'4 5': u'45'}, {u'1': u'11', u'2': u'22',
                                                  u'4': u'4', u'5': u'5',
                                                  None: u'-'})
 
-        self.assertEquals(trans(u'1 2 3 4 5 6 7 8 9', 'my_complex'), u'11-22---45--------')
+        self.assertEqual(trans(u'1 2 3 4 5 6 7 8 9', 'my_complex'), u'11-22---45--------')
 
     def test_encode_bytes_exc(self):
         if PY2:
@@ -116,41 +116,41 @@ class CodecTests(unittest.TestCase):
 
     @py2
     def test_ansii(self):
-        self.assertEquals(u'qwerty'.encode('trans'), u'qwerty')
-        self.assertEquals(u'1 2 3 4 5 \n6 7 8 9'.encode('trans'), u'1 2 3 4 5 \n6 7 8 9')
+        self.assertEqual(u'qwerty'.encode('trans'), u'qwerty')
+        self.assertEqual(u'1 2 3 4 5 \n6 7 8 9'.encode('trans'), u'1 2 3 4 5 \n6 7 8 9')
         self.assertTrue(isinstance(u'qwerty'.encode('trans'), unicode))
 
     @py2
     def test_ansii_slug(self):
-        self.assertEquals(u'1 2 3 4 5 \n6 7 8 9'.encode('trans/slug'), u'1_2_3_4_5__6_7_8_9')
+        self.assertEqual(u'1 2 3 4 5 \n6 7 8 9'.encode('trans/slug'), u'1_2_3_4_5__6_7_8_9')
         self.assertTrue(isinstance(u'qwerty'.encode('trans/slug'), unicode))
 
     @py2
     def test_russian(self):
-        self.assertEquals(u'йцукен'.encode('trans'), u'ycuken')
-        self.assertEquals(self.s.encode('trans'), self.s_encoded)
+        self.assertEqual(u'йцукен'.encode('trans'), u'ycuken')
+        self.assertEqual(self.s.encode('trans'), self.s_encoded)
         self.assertTrue(isinstance(self.s.encode('trans'), unicode))
 
     @py2
     def test_russian_slug(self):
-        self.assertEquals(self.s.encode('trans/slug')[-42:-1],
+        self.assertEqual(self.s.encode('trans/slug')[-42:-1],
                 u'_c__G__L__Oldi___Skazki_dedushki_vampira_')
 
     @py2
     def test_russian_diphthongs(self):
-        self.assertEquals(u'Юй Икари...'.encode('trans'), u'Yuy Ikari...')
+        self.assertEqual(u'Юй Икари...'.encode('trans'), u'Yuy Ikari...')
 
     @py2
     def test_my_table_simple(self):
         trans.tables['my_simple'] = {u'1': u'2', u'2': u'3'}
-        self.assertEquals(u'1 2'.encode('trans/my_simple'), u'2_3')
+        self.assertEqual(u'1 2'.encode('trans/my_simple'), u'2_3')
 
     @py2
     def test_my_table_complex(self):
         trans.tables['my_complex'] = ({u'4 5': u'45'}, {u'1': u'11', u'2': u'22',
                                                  u'4': u'4', u'5': u'5',
                                                  None: u'-'})
-        self.assertEquals(u'1 2 3 4 5 6 7 8 9'.encode('trans/my_complex'),
+        self.assertEqual(u'1 2 3 4 5 6 7 8 9'.encode('trans/my_complex'),
                             u'11-22---45--------')
 
     @py2
@@ -174,7 +174,7 @@ class CodecTests(unittest.TestCase):
             raise SkipTest('Not set SET_DEFAULT_UTF8. Execute "python ./tests.py".')
 
         trans.tables[u'имя_таблицы'] = {u'1': u'2', u'2': u'3'}
-        self.assertEquals(u'1 2'.encode(u'trans/имя_таблицы'), u'2_3')
+        self.assertEqual(u'1 2'.encode(u'trans/имя_таблицы'), u'2_3')
 
 
 if __name__ == '__main__':
