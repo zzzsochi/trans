@@ -149,7 +149,7 @@ czech = {
 polish = {
     u'ą': u'a', u'ć': u'c', u'ę': u'e', u'ł': u'l', u'ń': u'n', u'ó': u'o',
     u'ś': u's', u'ź': u'z', u'ż': u'z',
-    u'Ą': u'A', u'Ć': u'C', u'Ę': u'e', u'Ł': u'L', u'Ń': u'N', u'Ó': u'o',
+    u'Ą': u'A', u'Ć': u'C', u'Ę': u'e', u'Ł': u'L', u'Ń': u'N', u'Ó': u'O',
     u'Ś': u'S', u'Ź': u'Z', u'Ż': u'Z'
 }
 
