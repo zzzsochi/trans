@@ -168,10 +168,10 @@ kazakh = (russian[0].copy(), {
 })
 kazakh[1].update(russian[1])
 
-ascii_str = u'''_0123456789
-abcdefghijklmnopqrstuvwxyz
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
-!"#$%&'()*+,_-./:;<=>?@[\\]^`{|}~ \t\n\r\x0b\x0c'''
+ascii_str = (u'_0123456789'
+             u'abcdefghijklmnopqrstuvwxyz'
+             u'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+             u'!"#$%&\'()*+,_-./:;<=>?@[\\]^`{|}~ \t\n\r\x0b\x0c')
 
 ascii = ({}, dict(zip(ascii_str, ascii_str)))
 for t in [latin, greek, turkish, russian, ukrainian, czech, polish, latvian, kazakh]:
