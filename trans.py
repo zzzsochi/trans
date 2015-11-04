@@ -26,8 +26,8 @@ https://github.com/zzzsochi/trans
 import sys
 import codecs
 
-__version__ = '2.0.1'
-__author__ = 'Zelenyak Aleksandr aka ZZZ <zzz.sochi@gmail.com>'
+__version__ = '2.0.2'
+__author__ = 'Zelenyak Aleksander aka ZZZ <zzz.sochi@gmail.com>'
 
 PY2 = sys.version_info[0] == 2
 
@@ -48,12 +48,12 @@ class Trans(object):
             else:
                 raise ValueError('Table not set.')
 
-        if not isinstance(input, unicode if PY2 else str):
+        if not isinstance(input, unicode if PY2 else str):  # noqa
             raise TypeError(
                 'trans codec support only unicode string, {0!r} given.'.format(type(input))
             )
 
-        if isinstance(table, basestring if PY2 else str):
+        if isinstance(table, basestring if PY2 else str):  # noqa
             try:
                 table = self.tables[table]
             except KeyError:
@@ -88,7 +88,7 @@ latin = {
     u'Ì': u'I',  u'Í': u'I',  u'Î': u'I', u'Ï': u'I', u'Ð': u'D', u'Ñ': u'N',
     u'Ò': u'O',  u'Ó': u'O',  u'Ô': u'O', u'Õ': u'O', u'Ö': u'O', u'Ő': u'O',
     u'Ø': u'O',  u'Ù': u'U',  u'Ú': u'U', u'Û': u'U', u'Ü': u'U', u'Ű': u'U',
-    u'Ý': u'Y',  u'Þ': u'TH', u'ß': u'ss'
+    u'Ý': u'Y',  u'Þ': u'TH', u'ß': u'ss',
 }
 
 greek = {
@@ -104,7 +104,7 @@ greek = {
     u'Ν': u'N', u'Ξ': u'3', u'Ο': u'O', u'Π': u'P', u'Ρ': u'R',  u'Σ': u'S',
     u'Τ': u'T', u'Υ': u'Y', u'Φ': u'F', u'Χ': u'X', u'Ψ': u'PS', u'Ω': u'W',
     u'Ά': u'A', u'Έ': u'E', u'Ί': u'I', u'Ό': u'O', u'Ύ': u'Y',  u'Ή': u'H',
-    u'Ώ': u'W', u'Ϊ': u'I', u'Ϋ': u'Y'
+    u'Ώ': u'W', u'Ϊ': u'I', u'Ϋ': u'Y',
 }
 
 turkish = {
@@ -130,12 +130,12 @@ russian = (
     u'Л': u'L',  u'М': u'M',  u'Н': u'N',  u'О': u'O', u'П': u'P', u'Р': u'R',
     u'С': u'S',  u'Т': u'T',  u'У': u'U',  u'Ф': u'F', u'Х': u'H', u'Ц': u'C',
     u'Ч': u'Ch', u'Ш': u'Sh', u'Щ': u'Sh', u'Ъ': u'',  u'Ы': u'Y', u'Ь': u'',
-    u'Э': u'E',  u'Ю': u'Yu', u'Я': u'Ya'
+    u'Э': u'E',  u'Ю': u'Yu', u'Я': u'Ya',
 })
 
 ukrainian = (russian[0].copy(), {
     u'Є': u'Ye', u'І': u'I', u'Ї': u'Yi', u'Ґ': u'G',
-    u'є': u'ye', u'і': u'i', u'ї': u'yi', u'ґ': u'g'
+    u'є': u'ye', u'і': u'i', u'ї': u'yi', u'ґ': u'g',
 })
 ukrainian[1].update(russian[1])
 
@@ -143,28 +143,28 @@ czech = {
     u'č': u'c', u'ď': u'd', u'ě': u'e', u'ň': u'n', u'ř': u'r', u'š': u's',
     u'ť': u't', u'ů': u'u', u'ž': u'z',
     u'Č': u'C', u'Ď': u'D', u'Ě': u'E', u'Ň': u'N', u'Ř': u'R', u'Š': u'S',
-    u'Ť': u'T', u'Ů': u'U', u'Ž': u'Z'
+    u'Ť': u'T', u'Ů': u'U', u'Ž': u'Z',
 }
 
 polish = {
     u'ą': u'a', u'ć': u'c', u'ę': u'e', u'ł': u'l', u'ń': u'n', u'ó': u'o',
     u'ś': u's', u'ź': u'z', u'ż': u'z',
     u'Ą': u'A', u'Ć': u'C', u'Ę': u'E', u'Ł': u'L', u'Ń': u'N', u'Ó': u'O',
-    u'Ś': u'S', u'Ź': u'Z', u'Ż': u'Z'
+    u'Ś': u'S', u'Ź': u'Z', u'Ż': u'Z',
 }
 
 latvian = {
     u'ā': u'a', u'č': u'c', u'ē': u'e', u'ģ': u'g', u'ī': u'i', u'ķ': u'k',
     u'ļ': u'l', u'ņ': u'n', u'š': u's', u'ū': u'u', u'ž': u'z',
     u'Ā': u'A', u'Č': u'C', u'Ē': u'E', u'Ģ': u'G', u'Ī': u'i', u'Ķ': u'k',
-    u'Ļ': u'L', u'Ņ': u'N', u'Š': u'S', u'Ū': u'u', u'Ž': u'Z'
+    u'Ļ': u'L', u'Ņ': u'N', u'Š': u'S', u'Ū': u'u', u'Ž': u'Z',
 }
 
 kazakh = (russian[0].copy(), {
     u'ә': u'a', u'ғ': u'g', u'қ': u'k', u'ң': 'n', u'ө': u'o', u'ұ': u'u',
     u'ү': u'u', u'һ': u'h', u'і': u'i',
     u'Ә': u'A', u'Ғ': u'G', u'Қ': u'K', u'Ң': 'N', u'Ө': u'O', u'Ұ': u'U',
-    u'Ү': u'U', u'Һ': u'H', u'І': u'I'
+    u'Ү': u'U', u'Һ': u'H', u'І': u'I',
 })
 kazakh[1].update(russian[1])
 
