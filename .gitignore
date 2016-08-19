@@ -1,6 +1,7 @@
 
 *.pyc
 *.pyo
+__pycache__
 
 PKG-INFO
 MANIFEST
@@ -8,3 +9,7 @@ MANIFEST
 trans.egg-info/
 dist/
 
+/.cache
+/*.sublime-project
+/*.sublime-settings
+/*.sublime-workspace
