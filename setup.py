@@ -1,10 +1,11 @@
 # coding: utf8
 
+import codecs
 from distutils.core import setup
 
 import trans
 
-long_description = open('README.rst', 'r').read()
+long_description = codecs.open('README.rst', 'r', 'utf-8').read()
 
 description = 'National characters transcription module.'
 
@@ -29,6 +30,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 
     py_modules=['trans'],
