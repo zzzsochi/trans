@@ -1,8 +1,8 @@
 # coding: utf8
 
-u"""
-This module translates national characters into similar sounding
-latin characters (transliteration).
+u""" This module translates national characters into similar
+sounding latin characters (transliteration).
+
 At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
 and Kazakh alphabets are supported (it covers 99% of needs).
 
@@ -33,15 +33,17 @@ PY2 = sys.version_info[0] == 2
 
 
 class Trans(object):
-    '''Main class for transliteration with tables.'''
+    """ Main class for transliteration with tables.
+    """
     def __init__(self, tables=None, default_table=None):
         self.tables = tables or {}
         self.default_table = default_table
 
     def __call__(self, input, table=None):
-        '''Translate unicode string, using 'table'.
-           Table may be tuple (diphthongs, other), dict (other) or string name of table.'''
+        """ Translate unicode string, using 'table'.
 
+        Table may be tuple (diphthongs, other), dict (other) or string name of table.
+        """
         if table is None:
             if self.default_table is not None:
                 table = self.default_table
@@ -243,13 +245,13 @@ if PY2:
         try:
             table = trans.tables[table_name]
         except KeyError:
-            raise ValueError('Table "{0}" not found in tables!'.format(table_name))
+            raise ValueError("Table {0!r} not found in tables!".format(table_name))
         else:
             data = trans(input, table)
             return data, len(data)
 
     def no_decode(input, errors='strict'):
-        raise TypeError('trans codec does not support decode.')
+        raise TypeError("trans codec does not support decode.")
 
     def trans_codec(enc):
         if enc == 'trans':
@@ -264,7 +266,7 @@ if PY2:
             return None
 
         if table_name not in trans.tables:
-            raise ValueError(u'Table "{0}" not found in tables!').format(table_name)
+            raise ValueError(u"Table {0!r} not found in tables!").format(table_name)
 
         return codecs.CodecInfo(lambda i, e='strict': encode(i, e, table_name), no_decode)
 

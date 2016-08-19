@@ -13,7 +13,8 @@ SET_DEFAULT_UTF8 = False
 
 
 def py2(func):
-    '''Mark test as work only with python 2'''
+    """ Mark test as work only with python 2.
+    """
     def wrapper(self):
         if not PY2:
             raise SkipTest('This test only for python 2')
@@ -26,19 +27,19 @@ def py2(func):
 
 
 class TransTests(unittest.TestCase):
-    s = u'''
+    s = u"""
     -- Раскудрить твою через коромысло в бога душу мать
              триста тысяч раз едрену вошь тебе в крыло
              и кактус в глотку! -- взревел разъяренный Никодим.
     -- Аминь, -- робко добавил из склепа папа Пий.
-                 (c) Г. Л. Олди, "Сказки дедушки вампира".'''
+                 (c) Г. Л. Олди, "Сказки дедушки вампира"."""
 
-    s_encoded = u'''
+    s_encoded = u"""
     -- Raskudrit tvoyu cherez koromyslo v boga dushu mat
              trista tysyach raz edrenu vosh tebe v krylo
              i kaktus v glotku! -- vzrevel razyarennyy Nikodim.
     -- Amin, -- robko dobavil iz sklepa papa Piy.
-                 (c) G. L. Oldi, "Skazki dedushki vampira".'''
+                 (c) G. L. Oldi, "Skazki dedushki vampira"."""
 
     def tearDown(self):
         for table in ['my_simple', 'my_complex']:
@@ -95,19 +96,19 @@ class TransTests(unittest.TestCase):
 
 
 class CodecTests(unittest.TestCase):
-    s = u'''
+    s = u"""
     -- Раскудрить твою через коромысло в бога душу мать
              триста тысяч раз едрену вошь тебе в крыло
              и кактус в глотку! -- взревел разъяренный Никодим.
     -- Аминь, -- робко добавил из склепа папа Пий.
-                 (c) Г. Л. Олди, "Сказки дедушки вампира".'''
+                 (c) Г. Л. Олди, "Сказки дедушки вампира"."""
 
-    s_encoded = u'''
+    s_encoded = u"""
     -- Raskudrit tvoyu cherez koromyslo v boga dushu mat
              trista tysyach raz edrenu vosh tebe v krylo
              i kaktus v glotku! -- vzrevel razyarennyy Nikodim.
     -- Amin, -- robko dobavil iz sklepa papa Piy.
-                 (c) G. L. Oldi, "Skazki dedushki vampira".'''
+                 (c) G. L. Oldi, "Skazki dedushki vampira"."""
 
     def tearDown(self):
         for table in ['my_simple', 'my_complex']:
@@ -166,7 +167,7 @@ class CodecTests(unittest.TestCase):
 
     @py2
     def test_my_table_uname(self):
-        u'''Unicode table name not allowed because of
+        u"""Unicode table name not allowed because of
         http://docs.python.org/2/howto/unicode.html#the-unicode-type
 
             The unicode() constructor has the signature unicode(string[, encoding, errors]).
@@ -176,7 +177,7 @@ class CodecTests(unittest.TestCase):
 
         But if do sys.setdefaultencoding("UTF-8"), it will work!
         See bottom of this file.
-        '''
+        """
         if not SET_DEFAULT_UTF8:
             raise SkipTest('Not set SET_DEFAULT_UTF8. Execute "python ./tests.py".')
 
