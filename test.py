@@ -141,6 +141,13 @@ class CodecTests(unittest.TestCase):
         self.assertEqual(u'Юй Икари...'.encode('trans'), u'Yuy Ikari...')
 
     @py2
+    def test_farsi(self):
+        self.assertEqual(u'همه‌ی افراد بشر آزاد به دنیا می‌آیند و ا'
+                         u'ز دید حیثیت و حقوق با هم برابرند'.encode('trans'),
+                         u'hmhye afrad bshr azad bh dnyea myeayend '
+                         u'wa az dyed hyethyet wa hqwaq ba hm brabrnd')
+
+    @py2
     def test_my_table_simple(self):
         trans.tables['my_simple'] = {u'1': u'2', u'2': u'3'}
         self.assertEqual(u'1 2'.encode('trans/my_simple'), u'2_3')
