@@ -26,7 +26,7 @@ https://github.com/zzzsochi/trans
 import sys
 import codecs
 
-__version__ = '2.0.2'
+__version__ = '2.1.0'
 __author__ = 'Zelenyak Aleksander aka ZZZ <zzz.sochi@gmail.com>'
 
 PY2 = sys.version_info[0] == 2

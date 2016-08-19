@@ -118,6 +118,13 @@ These two tables are equivalent:
 ChangeLog
 ---------
 
+2.1 2016-09-19
+
+    * Add Farsi alphabet (thx rodgar-nvkz)
+    * Use pytest
+    * Some code style refactoring
+
+
 2.0 2013-04-01
 
     * Python 3 support
