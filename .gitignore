@@ -10,6 +10,7 @@ trans.egg-info/
 dist/
 
 /.cache
+/.python-version
 /*.sublime-project
 /*.sublime-settings
 /*.sublime-workspace
