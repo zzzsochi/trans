@@ -168,13 +168,54 @@ kazakh = (russian[0].copy(), {
 })
 kazakh[1].update(russian[1])
 
+farsi = {
+    u'ا': u'a',
+    u'أ': u'a', u'\uFE81': u'a', u'\uFE82': u'a',
+    u'آ': u'a', u'\uFE83': u'a', u'\uFE84': u'a',
+    u'ب': u'b', u'\uFE8F': u'b', u'\uFE90': u'b', u'\uFE92': u'b', u'\uFE91': u'b',
+    u'ت': u't', u'\uFE95': u't', u'\uFE96': u't', u'\uFE98': u't', u'\uFE97': u't',
+    u'ث': u'th', u'\uFE99': u'th', u'\uFE9A': u'th', u'\uFE9C': u'th', u'\uFE9B': u'th',
+    u'ج': u'j', u'\uFE9D': u'j', u'\uFE9E': u'j', u'\uFEA0': u'j', u'\uFE9F': u'j',
+    u'ح': u'h', u'\uFEA1': u'h', u'\uFEA2': u'h', u'\uFEA4': u'h', u'\uFEA3': u'h',
+    u'خ': u'x', u'\uFEA5': u'x', u'\uFEA6': u'x', u'\uFEA8': u'x', u'\uFEA7': u'x',
+    u'د': u'd', u'\uFEA9': u'd', u'\uFEAA': u'd',
+    u'ذ': u'd', u'\uFEAB': u'd', u'\uFEAC': u'd',
+    u'ر': u'r', u'\uFEAD': u'r', u'\uFEAE': u'r',
+    u'ز': u'z', u'\uFEAF': u'z', u'\uFEB0': u'z',
+    u'س': u's', u'\uFEB1': u's', u'\uFEB2': u's', u'\uFEB4': u's', u'\uFEB3 ': u's',
+    u'ش': u'sh', u'\uFEB5': u'sh', u'\uFEB6': u'sh', u'\uFEB8': u'sh', u'\uFEB7': u'sh',
+    u'ص': u's', u'\uFEB9': u's', u'\uFEBA': u's', u'\uFEBC': u's', u'\uFEBB': u's',
+    u'ض': u'd', u'\uFEBD': u'd', u'\uFEBE': u'd', u'\uFEC0': u'd', u'\uFEBF': u'd',
+    u'ط': u't', u'\uFEC1': u't', u'\uFEC2': u't', u'\uFEC4': u't', u'\uFEC3': u't',
+    u'ظ': u'z', u'\uFEC5': u'z', u'\uFEC6': u'z', u'\uFEC8': u'z', u'\uFEC7': u'z',
+    u'ع': u'ao', u'\uFEC9': u'ao', u'\uFECA': u'ao', u'\uFECC': u'ao', u'\uFECB': u'ao',
+    u'غ': u'za', u'\uFECD': u'za', u'\uFECE': u'za', u'\uFED0': u'za', u'\uFECF': u'za',
+    u'ف': u'f', u'\uFED1': u'f', u'\uFED2': u'f', u'\uFED4': u'f', u'\uFED3': u'f',
+    u'ق': u'q', u'\uFED5': u'q', u'\uFED6': u'q', u'\uFED8': u'q', u'\uFED7': u'q',
+    u'ك': u'k', u'\uFED9': u'k', u'\uFEDA': u'k', u'\uFEDC': u'k', u'\uFEDB': u'k',
+    u'ل': u'l', u'\uFEDD': u'l', u'\uFEDE': u'l', u'\uFEE0': u'l', u'\uFEDF': u'l',
+    u'م': u'm', u'\uFEE1': u'm', u'\uFEE2': u'm', u'\uFEE4': u'm', u'\uFEE3': u'm',
+    u'ن': u'n', u'\uFEE5': u'n', u'\uFEE6': u'n', u'\uFEE8': u'n', u'\uFEE7': u'n',
+    u'ه': u'h', u'\uFEE9': u'h', u'\uFEEA': u'h', u'\uFEEC': u'h', u'\uFEEB': u'h',
+    u'و': u'wa', u'\uFEED': u'wa', u'\uFEEE': u'wa',
+    u'ي': u'ya', u'\uFEF1': u'ya', u'\uFEF2': u'ya', u'\uFEF4': u'ya', u'\uFEF3': u'ya',
+    u'ة': u'at', u'\uFE93': u'at', u'\uFE94': u'at',
+    u'ى': u'a', u'\uFEEF': u'a', u'\uFEF0': u'a',
+    u'ی': u'ye', u'\uFBFC': u'ye', u'\uFBFD': u'ye', u'\uFBFE': u'ye', u'\uFBFF': u'ye',
+    # Arabic Sukun
+    u'\u064B': u'', u'\u064C': u'', u'\u064D': u'', u'\u064E': u'', u'\u064F': u'',
+    u'\u0650': u'', u'\u0651': u'', u'\u0652': u'', u'\u0653': u'', u'\u0670': u'',
+    # Arabic punctuation
+    u'،': u',', u'؍': u'.', u'؟': u'?', u'٭': u'★', u'؞': u'...', u'٬': u'\'', u'\u200C': u'',
+}
+
 ascii_str = (u'_0123456789'
              u'abcdefghijklmnopqrstuvwxyz'
              u'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
              u'!"#$%&\'()*+,_-./:;<=>?@[\\]^`{|}~ \t\n\r\x0b\x0c')
 
 ascii = ({}, dict(zip(ascii_str, ascii_str)))
-for t in [latin, greek, turkish, russian, ukrainian, czech, polish, latvian, kazakh]:
+for t in [latin, greek, turkish, russian, ukrainian, czech, polish, latvian, kazakh, farsi]:
     if isinstance(t, dict):
         t = ({}, t)
 
