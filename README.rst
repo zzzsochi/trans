@@ -4,8 +4,8 @@ The **trans** module
 
 This module translates national characters into similar sounding
 latin characters (transliteration).
-At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian
-and Kazakh alphabets are supported (it covers 99% of needs).
+At the moment, Czech, Greek, Latvian, Polish, Turkish, Russian, Ukrainian,
+Kazakh and Farsi alphabets are supported (it covers 99% of needs).
 
 .. contents::
 
@@ -42,7 +42,7 @@ This is readability
   ...             и кактус в глотку! -- взревел разъяренный Никодим.
   ...    -- Аминь, -- робко добавил из склепа папа Пий.
   ...                 (c) Г. Л. Олди, "Сказки дедушки вампира".'''
-  >>> 
+  >>>
   >>> print s.encode('trans')
      -- Raskudrit tvoyu cherez koromyslo v boga dushu mat
               trista tysyach raz edrenu vosh tebe v krylo
@@ -55,7 +55,7 @@ Table "**slug**"
 Use the table "slug", leaving only the Latin characters, digits and underscores:
 
   >>> print u'1 2 3 4 5 \n6 7 8 9 0'.encode('trans')
-  1 2 3 4 5 
+  1 2 3 4 5
   6 7 8 9 0
   >>> print u'1 2 3 4 5 \n6 7 8 9 0'.encode('trans/slug')
   1_2_3_4_5__6_7_8_9_0
@@ -75,10 +75,10 @@ Simple variant
   Traceback (most recent call last):
       ...
   ValueError: Table "my" not found in tables!
-  >>> trans.tables['my'] = {u'1': u'A', u'2': u'B'}; 
+  >>> trans.tables['my'] = {u'1': u'A', u'2': u'B'};
   >>> u'1 2 3 4 5 6 7 8 9 0'.encode('trans/my')
   u'A_B________________'
-  >>> 
+  >>>
 
 A little harder
 ~~~~~~~~~~~~~~~
